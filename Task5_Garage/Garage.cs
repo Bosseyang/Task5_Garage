@@ -22,8 +22,11 @@ namespace Task5_Garage
 
         public bool Park(T vehicle)
         {
-            //TODO: Need to check for unique registration number
-
+            //TODO: Test if this works
+            //We check if the garage is full OR if our input vehicle has the same regNr
+            //as any of the already parked ones.
+            if (count >= Capacity || vehicles.Any(v => v?.RegistrationNumber == vehicle.RegistrationNumber))
+                return false;
             vehicles[count++] = vehicle;
             return true;
         }
