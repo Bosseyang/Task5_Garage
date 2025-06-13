@@ -7,7 +7,7 @@ using Task5_Garage.Interfaces;
 
 namespace Task5_Garage.Models
 {
-    public class Vehicle : IVehicle
+    public abstract class Vehicle : IVehicle
     {
         public string RegistrationNumber { get; }
         public string Color { get; }
@@ -20,5 +20,6 @@ namespace Task5_Garage.Models
             NumberOfWheels = wheels;
         }
 
+        public abstract string GetVehicleInfo();
     }
 }

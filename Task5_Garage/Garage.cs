@@ -6,6 +6,7 @@ namespace Task5_Garage
 {
     public class Garage<T> : IEnumerable<T> where T : IVehicle
     {
+        //Private arrace of vehicles using generics with IVehicle interface
         private T[] vehicles;
         private int count;
 
@@ -19,16 +20,28 @@ namespace Task5_Garage
 
         }
 
+        public bool Park(T vehicle)
+        {
+            //TODO: Need to check for unique registration number
+
+            vehicles[count++] = vehicle;
+            return true;
+        }
+
+        public bool Remove(string regNr)
+        {
+            //TODO: Check vehicle and remove if regNr matches
+            return true;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             for(int i = 0; i< count; i++)
                 yield return vehicles[i];
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        
     }
 
 }

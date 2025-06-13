@@ -16,5 +16,8 @@ namespace Task5_Garage.Models
             FuelType = fuelType;
         }
 
+        public override string GetVehicleInfo() => 
+            $"Car: {RegistrationNumber}, Color: {Color}, " +
+                $"Number of Wheels: {NumberOfWheels}, Fuel Type: {FuelType}";
     }
 }

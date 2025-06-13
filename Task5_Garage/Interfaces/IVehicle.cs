@@ -5,5 +5,7 @@
         string Color { get; }
         string NumberOfWheels { get; }
         string RegistrationNumber { get; }
+        string GetVehicleInfo();
     }
+    
 }
