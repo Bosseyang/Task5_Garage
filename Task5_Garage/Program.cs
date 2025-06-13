@@ -1,13 +1,26 @@
 ﻿#region
-//Structure:
+// ------- Structure -------
+//TODO: Update along the project
 
 //Program
-//  - Manager
+//  - Manager/
+//      - Garage
+//      - GarageHandler
 //      - UI
-//      - Handler
-//          - Garage
-//              - Car
-//              - Airplane
-//              - Vehicle
+
+//  - Models/
+//      - Car
+//      - Airplane
+//      - Vehicle
+
+//  - Interfaces/
+//      -IUI
+//      -IHandler
+//      -IVehicle
+
+//  - UI/
+//      - ConsoleUI
+
+// - Program
 #endregion
 

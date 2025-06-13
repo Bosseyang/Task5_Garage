@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task5_Garage.UI
+namespace Task5_Garage.Models
 {
-    internal class UI
+    internal class Vehicle
     {
     }
 }
