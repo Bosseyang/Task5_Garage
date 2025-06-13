@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task5_Garage
 {
-    internal class Handler
+    internal class GarageHandler
     {
     }
 }
