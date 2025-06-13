@@ -24,3 +24,7 @@
 // - Program
 #endregion
 
+static void Main()
+{
+
+}
