@@ -2,5 +2,8 @@
 {
     public interface IVehicle
     {
+        string Color { get; }
+        string NumberOfWheels { get; }
+        string RegistrationNumber { get; }
     }
 }
