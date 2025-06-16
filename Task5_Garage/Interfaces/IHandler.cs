@@ -10,5 +10,7 @@ namespace Task5_Garage.Interfaces
     {
         void ParkVehicle(IVehicle vehicle);
         bool RemoveVehicle(string registrationNumber);
+
+        bool CheckIfFull();
     }
 }

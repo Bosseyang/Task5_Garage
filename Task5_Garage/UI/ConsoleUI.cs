@@ -20,7 +20,7 @@ namespace Task5_Garage.UI
         {
             while (true)
             {
-                Console.WriteLine(" ---- Garage Menu ---- ");
+                Console.WriteLine("\n ---- Garage Menu ---- ");
                 Console.WriteLine("1. Park Vehicle");
                 Console.WriteLine("2. Remove Vehicle");
                 //TODO: Add more as the application grows.
@@ -29,6 +29,8 @@ namespace Task5_Garage.UI
                 switch (inputChoice)
                 {
                     case "1":
+                        if(handler.CheckIfFull())
+                            break;
                         ParkVehicle();
                         break;
                     case "2":
@@ -36,23 +38,29 @@ namespace Task5_Garage.UI
                         var reg = Console.ReadLine();
                         handler.RemoveVehicle(reg);
                         break;
+                    case "0":
+                        Console.WriteLine("Exit Application");
+                        Environment.Exit(0);
+                        break;
                 }
             }
         }
 
         private void ParkVehicle()
         {
-            Console.WriteLine("Registration Number: ");
-            var reg = Console.ReadLine();
-            Console.WriteLine("Color: ");
-            var color = Console.ReadLine();
-            Console.WriteLine("Number of Wheels:");
-            var wheels = Console.ReadLine();
-            Console.WriteLine("Fuel Type: ");
-            var fuelType = Console.ReadLine();
+            var reg = GetInput("Registration Number: ");
+            var color = GetInput("Color: ");
+            var wheels = GetInput("Number of Wheels: ");
+            var fuelType = GetInput("Fuel Type: ");
 
             var car = new Car(reg, color, wheels, fuelType);
             handler.ParkVehicle(car);
+        }
+
+        private string GetInput(string input)
+        {
+            Console.Write($"{input}");
+            return Console.ReadLine();
         }
     }
 }
