@@ -9,7 +9,7 @@ namespace Task5_Garage.Models
     public class Car : Vehicle
     {
 
-        public string FuelType { get; }
+        public string FuelType { get; } 
         public Car(string regNr, string color, string wheels, string fuelType) 
             : base(regNr, color, wheels)
         {

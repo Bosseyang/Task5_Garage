@@ -11,11 +11,18 @@ namespace Task5_Garage
     {
         private Garage<IVehicle> garage;
 
+        public GarageHandler(int capacity)
+        {
+            garage = new Garage<IVehicle>(capacity);
+        }
+
         public void ParkVehicle(IVehicle vehicle)
         {
-            if (garage.Park(vehicle))
+            int spot = garage.Park(vehicle);
+            Console.WriteLine(spot);
+            if (spot != 0)
             {
-                Console.WriteLine("Vehicle successfully parked");
+                Console.WriteLine($"Vehicle successfully parked at spot {spot}");
             }
             else
                 Console.WriteLine("Failed to park vehicle. Garage may be full.\n" +
@@ -24,7 +31,7 @@ namespace Task5_Garage
 
         public bool RemoveVehicle(string registrationNumber)
         {
-            if (garage.Remove(registrationNumber))
+            if (garage.RemoveVehicle(registrationNumber))
             {
                 Console.WriteLine("Vehicle successfully removed");
                 return true;

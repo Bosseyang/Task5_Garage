@@ -8,8 +8,14 @@ using Task5_Garage.Models;
 
 namespace Task5_Garage.UI
 {
-    public class ConsoleUI()
+    public class ConsoleUI
     {
+        private readonly IHandler? handler;
+
+        public ConsoleUI(IHandler handler)
+        {
+            this.handler = handler;
+        }
         public void ShowMenu()
         {
             while (true)
@@ -25,17 +31,13 @@ namespace Task5_Garage.UI
                     case "1":
                         ParkVehicle();
                         break;
-                        case "2":
-                        RemoveVehicle();
+                    case "2":
+                        Console.WriteLine("Enter registration number please");
+                        var reg = Console.ReadLine();
+                        handler.RemoveVehicle(reg);
                         break;
                 }
             }
-        }
-
-        private void RemoveVehicle()
-        {
-            Console.WriteLine("Remove vehicle with registration number: ");
-            var reg = Console.ReadLine();
         }
 
         private void ParkVehicle()
@@ -50,6 +52,7 @@ namespace Task5_Garage.UI
             var fuelType = Console.ReadLine();
 
             var car = new Car(reg, color, wheels, fuelType);
+            handler.ParkVehicle(car);
         }
     }
 }
