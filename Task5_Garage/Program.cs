@@ -25,7 +25,6 @@
 #endregion
 
 using Task5_Garage;
-using Task5_Garage.UI;
 
 class Program
 {
@@ -35,8 +34,9 @@ class Program
         Console.WriteLine("Please enter garage capacity: ");
         int capacity = int.Parse(Console.ReadLine());
         var handler = new GarageHandler(capacity);
-        var ui = new ConsoleUI(handler);
-        ui.ShowMenu();
+        var ui = new UI();
+        var manager = new Manager(handler, ui);
+        manager.Run();
 
     }
 }
