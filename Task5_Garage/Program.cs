@@ -35,7 +35,7 @@ class Program
         int capacity = int.Parse(Console.ReadLine());
         var handler = new GarageHandler(capacity);
         var ui = new UI();
-        var manager = new Manager(handler, ui);
+        var manager = new Manager(handler, ui, capacity);
         manager.Run();
 
     }

@@ -7,11 +7,13 @@ namespace Task5_Garage
     {
         private readonly IHandler? handler;
         private readonly IUI ui;
+        private readonly int capacity;
 
-        public Manager(IHandler handler, IUI ui)
+        public Manager(IHandler handler, IUI ui, int capacity)
         {
             this.handler = handler;
             this.ui = ui;
+            this.capacity = capacity;
         }
         public void Run()
         {
@@ -35,6 +37,12 @@ namespace Task5_Garage
                         break;
                     case "3":
                         handler.ListParkedVehicles();
+                        break;
+                    case "4":
+                        handler.RandomPopulateGarage(capacity);
+                        break;
+                    case "5":
+
                         break;
                     case "0":
                         ui.ShowMessage("Exit Application");

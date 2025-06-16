@@ -15,6 +15,7 @@ namespace Task5_Garage
             Console.WriteLine("1. Park Vehicle");
             Console.WriteLine("2. Remove Vehicle");
             Console.WriteLine("3. List Parked Vehicles");
+            Console.WriteLine("4. Populate Garage with randomly generated vehicles");
         }
         public string GetInput(string input)
         {

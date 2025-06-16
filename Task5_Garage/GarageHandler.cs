@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Task5_Garage.Interfaces;
+﻿using Task5_Garage.Interfaces;
 using Task5_Garage.Models;
 
 namespace Task5_Garage
@@ -16,21 +11,21 @@ namespace Task5_Garage
         public GarageHandler(int capacity)
         {
             garage = new Garage<IVehicle>(capacity);
-            
+
         }
         public bool CheckIfFull()
         {
-            if (garage.Count >= garage.Capacity)
-            {
+            if (garage.CheckIfFull()) 
+            { 
                 Console.WriteLine("Garage is full, can not park any more vehicles");
                 return true;
             }
+     
             return false;
         }
         public void ParkVehicle(IVehicle vehicle)
         {
             int spot = garage.ParkVehicle(vehicle);
-            Console.WriteLine(spot);
             if (spot == 0)
                 Console.WriteLine("Failed to park vehicle, garage is full!");
             else if (spot == -1)
@@ -58,5 +53,40 @@ namespace Task5_Garage
                 return false;
             }
         }
+
+        public void RandomPopulateGarage(int capacity)
+        {
+            var random = new Random();
+            var colors = new[] { "Red   ", "Orange", "Yellow", "Green ", "Blue  ", "Black ", "White ", "Gray  " };
+            var numberWheels = new[] { "3", "4", "6", "8" };
+            var fuelType = new[] { "Diesel", "Gasoline", "Ethanol", "Electric" };
+
+            for (int i = 0; i < capacity; i++)
+            {
+                if (CheckIfFull())
+                    break;
+                string color = colors[random.Next(colors.Length)];
+                string regNr = RandomRegNr(random);
+                string wheels = numberWheels[random.Next(numberWheels.Length)];
+                string fuel = fuelType[random.Next(fuelType.Length)];
+
+                //IVehicle vehicle = new Car("abc123", "Red", "4", "Diesel");
+
+                //if (typeof(T) == typeof(Car))
+                //    vehicle = new Car(regNr, color, wheels, fuel);
+                //ParkVehicle((T)vehicle);
+                IVehicle vehicle = new Car(regNr, color, wheels, fuel);
+                ParkVehicle(vehicle);
+
+            }
+
+        }
+        private string RandomRegNr(Random random)
+        {
+            string letters = new string(Enumerable.Range(0, 3).Select(r => (char)random.Next('A', 'Z' + 1)).ToArray());
+            string numbers = random.Next(100, 1000).ToString();
+            return letters + numbers;
+        }
+
     }
 }
