@@ -10,6 +10,7 @@ namespace Task5_Garage
         private int count;
 
         public int Capacity { get; }
+        public int Count => count;
 
         public Garage(int capacity)
         {
@@ -19,27 +20,31 @@ namespace Task5_Garage
 
         }
 
-        public int Park(T vehicle)
+        public int ParkVehicle(T vehicle)
         {
             //TODO: Test if this works
             //We check if the garage is full OR if our input vehicle has the same regNr
             //as any of the already parked ones.
-            if (count >= Capacity || vehicles.Any(v => v?.RegistrationNumber == vehicle.RegistrationNumber))
+            if (count >= Capacity)
                 return 0;
+            else if (vehicles.Any(v => v?.RegistrationNumber == vehicle.RegistrationNumber))
+                return -1;
 
             int firstEmptyIndex = Array.FindIndex(vehicles, v => v == null);
             vehicles[firstEmptyIndex] = vehicle;
-            return firstEmptyIndex+1;
+            count++;
+            return firstEmptyIndex + 1;
         }
 
-        public bool RemoveVehicle(string regNr)
+        public bool RemoveVehicle(string registrationNumber)
         {
-            //TODO: Check vehicle and remove if regNr matches
             for (int i = 0; i < vehicles.Length; i++)
             {
-                if (vehicles[i].RegistrationNumber.Equals(regNr, StringComparison.OrdinalIgnoreCase))
+                if (vehicles[i].RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase))
                 {
-                    vehicles[i] = default(T)!;
+                    Console.WriteLine($"Vehicle with registration: {vehicles[i].RegistrationNumber}");
+                    vehicles[i] = default!;
+
                     count--;
                 }
             }
