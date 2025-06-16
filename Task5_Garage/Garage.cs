@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Diagnostics.Metrics;
 using Task5_Garage.Interfaces;
+using Task5_Garage.Models;
 
 namespace Task5_Garage
 {
@@ -40,7 +42,7 @@ namespace Task5_Garage
         public bool RemoveVehicle(string registrationNumber)
         {
             bool removed = false;
-            for (int i = 0; i < vehicles.Length; i++)
+            for (int i = 0; i < Capacity; i++)
             {
                 if (vehicles[i] != null && vehicles[i].RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase))
                 {
@@ -55,7 +57,7 @@ namespace Task5_Garage
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < Capacity; i++)
             {
                 if (vehicles[i] != null)
                     yield return vehicles[i];
@@ -63,6 +65,17 @@ namespace Task5_Garage
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+
+
+        public bool CheckIfFull()
+        {
+            if (count >= Capacity)
+            {
+                return true;
+            }
+            return false;
+        }
 
     }
 
