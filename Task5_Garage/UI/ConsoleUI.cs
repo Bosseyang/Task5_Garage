@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task5_Garage.Interfaces;
 using Task5_Garage.Models;
 
 namespace Task5_Garage.UI
 {
     public class ConsoleUI()
     {
-
         public void ShowMenu()
         {
             while (true)
             {
                 Console.WriteLine(" ---- Garage Menu ---- ");
                 Console.WriteLine("1. Park Vehicle");
+                Console.WriteLine("2. Remove Vehicle");
                 //TODO: Add more as the application grows.
 
                 var inputChoice = Console.ReadLine();
@@ -24,8 +25,17 @@ namespace Task5_Garage.UI
                     case "1":
                         ParkVehicle();
                         break;
+                        case "2":
+                        RemoveVehicle();
+                        break;
                 }
             }
+        }
+
+        private void RemoveVehicle()
+        {
+            Console.WriteLine("Remove vehicle with registration number: ");
+            var reg = Console.ReadLine();
         }
 
         private void ParkVehicle()
