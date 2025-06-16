@@ -22,9 +22,10 @@ namespace Task5_Garage
 
         public int ParkVehicle(T vehicle)
         {
-            //TODO: Test if this works
+            //TODO: Validate with following Abc123 format
             //We check if the garage is full OR if our input vehicle has the same regNr
             //as any of the already parked ones.
+       
             if (count >= Capacity)
                 return 0;
             else if (vehicles.Any(v => v?.RegistrationNumber == vehicle.RegistrationNumber))
@@ -38,23 +39,27 @@ namespace Task5_Garage
 
         public bool RemoveVehicle(string registrationNumber)
         {
+            bool removed = false;
             for (int i = 0; i < vehicles.Length; i++)
             {
-                if (vehicles[i].RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase))
+                if (vehicles[i] != null && vehicles[i].RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine($"Vehicle with registration: {vehicles[i].RegistrationNumber}");
+                    Console.WriteLine($"Removing vehicle... ");
                     vehicles[i] = default!;
-
                     count--;
+                    removed = true;
                 }
             }
-            return true;
+            return removed;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < count; i++)
-                yield return vehicles[i];
+            {
+                if (vehicles[i] != null)
+                    yield return vehicles[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
