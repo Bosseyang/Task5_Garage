@@ -1,4 +1,6 @@
-﻿using Task5_Garage.Interfaces;
+﻿using System.ComponentModel.Design;
+using System.Text.RegularExpressions;
+using Task5_Garage.Interfaces;
 using Task5_Garage.Models;
 
 namespace Task5_Garage
@@ -28,7 +30,30 @@ namespace Task5_Garage
                     case "1":
                         if (handler.CheckIfFull())
                             break;
-                        ParkVehicle();
+                        while (true)
+                        {
+                            ui.ShowVehicleMenu();
+                            var inputVehicle = ui.GetInput("");
+                            if (inputVehicle == "0")
+                                break;
+                            ParkVehicle(inputVehicle);
+                            break;
+                            //switch (inputVehicle)
+                            //{
+                            //    case "1":
+                            //        break;
+                            //    case "2":
+                            //        break;
+                            //    case "3":
+                            //        break;
+                            //    case "4":
+                            //        break;
+                            //    case "5":
+                            //        break;
+                                        
+                            //}
+                        }
+                        //ParkVehicle();
                         break;
                     case "2":
                         ui.ShowMessage("Enter registration number please");
@@ -52,30 +77,62 @@ namespace Task5_Garage
             }
         }
 
-        private void ParkVehicle()
+        private void ParkVehicle(string inputVehicle)
         {
-            //regNr = ui.GetInput("Registration Number: ");
-            var regNr = " ";
+            var registrationNumber = IsValidRegNr();
+            if (registrationNumber == "0")
+            {
+                ui.ShowMessage("No registration number entered, vehicle not parked");
+                return;
+            }
+            var color = ui.GetInput("Color: ");
+            var wheels = ui.GetInput("Number of Wheels: ");
+            switch (inputVehicle)
+            {
+                case "1":
+                    var wingspan = ui.GetInput("Wingspan: ");
+                    var airplane = new Airplane(registrationNumber, color, wheels, wingspan);
+                    handler.ParkVehicle(airplane);
+                    break;
+                case "2":
+                    var length = ui.GetInput("Length: ");
+                    var boat = new Boat(registrationNumber, color, wheels, length);
+                    handler.ParkVehicle(boat);
+                    break;
+                case "3":
+                    var numberOfSeats = ui.GetInput("Number of seats: ");
+                    var buss = new Buss(registrationNumber, color, wheels, numberOfSeats);
+                    handler.ParkVehicle(buss);
+                    break;
+                case "4":
+                    var fuelType = ui.GetInput("Fuel Type: ");
+                    var car = new Car(registrationNumber, color, wheels, fuelType);
+                    handler.ParkVehicle(car);
+                    break;
+                case "5":
+                    var cylinderVolume = ui.GetInput("Cylinder volume: ");
+                    var motorcycle = new Motorcycle(registrationNumber, color, wheels, cylinderVolume);
+                    handler.ParkVehicle(motorcycle);
+                    break;
+            }            
+        }
+
+        private string IsValidRegNr()
+        {
+            string registrationNumber;
+            ui.ShowMessage("Enter 0 to exit to main menu");
             while (true)
             {
-                regNr = ui.GetInput("Registration Number: ");
-                if (!IsValidRegNr(regNr))
-                    ui.ShowMessage($"{regNr} not valid, please enter on the format abc123 (None case sensitive).");
+                registrationNumber = ui.GetInput("Registration Number: ");
+                if (registrationNumber == "0")
+                    break;
+                else if (!System.Text.RegularExpressions.Regex.IsMatch(registrationNumber, @"^[A-Za-z]{3}[0-9]{3}$"))
+                    ui.ShowMessage($"{registrationNumber} is not valid, please enter on the format abc123 (None case sensitive).");
                 else
                     break;
 
             }
-            var color = ui.GetInput("Color: ");
-            var wheels = ui.GetInput("Number of Wheels: ");
-            var fuelType = ui.GetInput("Fuel Type: ");
-
-            var car = new Car(regNr, color, wheels, fuelType);
-            handler.ParkVehicle(car);
-        }
-
-        private bool IsValidRegNr(string registrationNumber)
-        {
-            return System.Text.RegularExpressions.Regex.IsMatch(registrationNumber, @"^[A-Za-z]{3}[0-9]{3}$");
+            return registrationNumber.ToUpper();
         }
     }
 }
