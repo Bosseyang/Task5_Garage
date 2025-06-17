@@ -68,8 +68,10 @@ namespace Task5_Garage
                 string color = colors[random.Next(colors.Length)];
                 string regNr = RandomRegNr(random);
                 string wheels = numberWheels[random.Next(numberWheels.Length)];
+                
                 string fuel = fuelType[random.Next(fuelType.Length)];
 
+                //TODO: Add more vehicles as we go
                 //IVehicle vehicle = new Car("abc123", "Red", "4", "Diesel");
 
                 //if (typeof(T) == typeof(Car))
