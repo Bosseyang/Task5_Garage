@@ -25,18 +25,30 @@
 #endregion
 
 using Task5_Garage;
+using Task5_Garage.Interfaces;
+
 
 class Program
 {
+
     static void Main()
     {
         //TODO: Handle inputs other than int here, maybe loop until you get correct input?
         Console.WriteLine("Please enter garage capacity: ");
-        int capacity = int.Parse(Console.ReadLine());
-        var handler = new GarageHandler(capacity);
-        var ui = new UI();
-        var manager = new Manager(handler, ui, capacity);
-        manager.Run();
+        while (true)
+        {
+            if (int.TryParse(Console.ReadLine(), out var capacity))
+            {
+                Console.Clear();
+                Console.WriteLine($"Garage capacity set to: {capacity}");
+                var handler = new GarageHandler(capacity);
+                var ui = new UI();
+                var manager = new Manager(handler, ui, capacity);
+                manager.Run();
+            }
+            Console.WriteLine("Please try again and enter an integer:");
+            
 
+        }
     }
 }

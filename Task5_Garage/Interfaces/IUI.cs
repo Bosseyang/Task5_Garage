@@ -5,5 +5,6 @@
         string GetInput(string input);
         void ShowMenu();
         void ShowMessage(string input);
+        void ShowVehicleMenu();
     }
 }
