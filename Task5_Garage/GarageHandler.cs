@@ -1,4 +1,6 @@
-﻿using Task5_Garage.Interfaces;
+﻿using System.Net;
+using System.Text.RegularExpressions;
+using Task5_Garage.Interfaces;
 using Task5_Garage.Models;
 
 namespace Task5_Garage
@@ -7,7 +9,7 @@ namespace Task5_Garage
     {
         private Garage<IVehicle> garage;
         private UI ui;
-        public int spot { get; }
+        public int Spot { get; private set; }
 
 
         public GarageHandler(int capacity)
@@ -28,19 +30,27 @@ namespace Task5_Garage
         }
         public void ParkVehicle(IVehicle vehicle)
         {
-            int spot = garage.ParkVehicle(vehicle);
-            if (spot == 0)
+            Spot = garage.ParkVehicle(vehicle);
+            if (Spot == 0)
                 Console.WriteLine("Failed to park vehicle, garage is full!");
-            else if (spot == -1)
+            else if (Spot == -1)
                 Console.WriteLine("Failed to park vehicle. " +
                     "Vehicle with same registration number is already parked.");
             else
-                Console.WriteLine($"Vehicle successfully parked at spot {spot}");
+                Console.WriteLine($"Vehicle successfully parked at spot {Spot}");
         }
         public void ListParkedVehicles()
         {
             foreach (var v in garage)
-                Console.WriteLine(v.GetVehicleInfo());
+                ui.ShowMessage(v.GetVehicleInfo());
+        }
+        public void ListVehicleTypes()
+        {
+            var vehicleGroup = garage.GroupBy(v => v.GetType().Name);
+            foreach (var vehicleType in vehicleGroup)
+            {
+                ui.ShowMessage($"{vehicleType.Key}: {vehicleType.Count()}");
+            }
         }
 
         public bool RemoveVehicle(string regNr)

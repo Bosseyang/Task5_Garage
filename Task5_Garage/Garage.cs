@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Diagnostics.Metrics;
+using System.Transactions;
 using Task5_Garage.Interfaces;
 using Task5_Garage.Models;
 
@@ -46,10 +47,13 @@ namespace Task5_Garage
             {
                 if (vehicles[i] != null && vehicles[i].RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine($"Removing vehicle... ");
+                    Console.WriteLine($"Removing {vehicles[i].GetType().Name} with {registrationNumber}... ");
                     vehicles[i] = default!;
                     count--;
                     removed = true;
+                    Console.WriteLine("Press a key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
                 }
             }
             return removed;
