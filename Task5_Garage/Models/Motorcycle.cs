@@ -18,6 +18,6 @@ namespace Task5_Garage.Models
 
         public override string GetVehicleInfo() =>
             $"Motorcycle: {RegistrationNumber} | Color: {Color}" +
-                $" | Number of Wheels: {NumberOfWheels} | Fuel Type: {CylinderVolume}";
+                $" | Number of Wheels: {NumberOfWheels} | Cylinder volume: {CylinderVolume}";
     }
 }

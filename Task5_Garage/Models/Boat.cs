@@ -17,7 +17,7 @@ namespace Task5_Garage.Models
         }
 
         public override string GetVehicleInfo() =>
-            $"Boat: {RegistrationNumber} | Color: {Color}" +
-                $" | Number of Wheels: {NumberOfWheels} | Fuel Type: {Length}";
+            $"Boat:       {RegistrationNumber} | Color: {Color}" +
+                $" | Number of Wheels: {NumberOfWheels} | Length:          {Length}";
     }
 }
