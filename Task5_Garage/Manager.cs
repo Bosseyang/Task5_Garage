@@ -38,22 +38,7 @@ namespace Task5_Garage
                                 break;
                             ParkVehicle(inputVehicle);
                             break;
-                            //switch (inputVehicle)
-                            //{
-                            //    case "1":
-                            //        break;
-                            //    case "2":
-                            //        break;
-                            //    case "3":
-                            //        break;
-                            //    case "4":
-                            //        break;
-                            //    case "5":
-                            //        break;
-                                        
-                            //}
                         }
-                        //ParkVehicle();
                         break;
                     case "2":
                         ui.ShowMessage("Enter registration number please");
@@ -64,10 +49,10 @@ namespace Task5_Garage
                         handler.ListParkedVehicles();
                         break;
                     case "4":
-                        handler.RandomPopulateGarage(capacity);
+                        handler.ListVehicleTypes();
                         break;
                     case "5":
-
+                        handler.RandomPopulateGarage(capacity);
                         break;
                     case "0":
                         ui.ShowMessage("Exit Application");
