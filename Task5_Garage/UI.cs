@@ -11,11 +11,14 @@ namespace Task5_Garage
     {
         public void ShowMenu()
         {
-            Console.WriteLine("\n ---- Garage Menu ---- ");
-            Console.WriteLine("1. Park Vehicle");
-            Console.WriteLine("2. Remove Vehicle");
-            Console.WriteLine("3. List Parked Vehicles");
-            Console.WriteLine("4. Populate Garage with randomly generated vehicles");
+            ShowMessage("\n ---- Garage Menu ---- ");
+            ShowMessage("1. Park Vehicle");
+            ShowMessage("2. Remove Vehicle");
+            ShowMessage("3. List Parked Vehicles");
+            ShowMessage("4. List Parked Vehicle Types and Their Corresponding Amount");
+            ShowMessage("5. Populate Garage with randomly generated vehicles");
+
+
         }
         public void ShowVehicleMenu()
         {

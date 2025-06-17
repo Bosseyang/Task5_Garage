@@ -34,7 +34,7 @@ class Program
     static void Main()
     {
         //TODO: Handle inputs other than int here, maybe loop until you get correct input?
-        Console.WriteLine("Please enter garage capacity: ");
+        Console.Write("Please enter garage capacity: ");
         while (true)
         {
             if (int.TryParse(Console.ReadLine(), out var capacity))
