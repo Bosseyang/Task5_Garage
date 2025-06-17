@@ -13,6 +13,7 @@ namespace Task5_Garage.Interfaces
 
         bool CheckIfFull();
         void ListParkedVehicles();
+        void ListVehicleTypes();
 
         void RandomPopulateGarage(int capacity);
     }
