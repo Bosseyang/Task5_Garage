@@ -2,7 +2,7 @@
 using Task5_Garage.Models;
 
 namespace Task5_Garage
-{//TODO: Bryt ut consoleUI och döp om till manager
+{
     public class Manager
     {
         private readonly IHandler? handler;
