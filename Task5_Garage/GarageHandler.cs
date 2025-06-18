@@ -43,7 +43,6 @@ namespace Task5_Garage
         }
         public void ListParkedVehicles()
         {
-         
             foreach (var v in garage)
                 ui.ShowMessage(v.GetVehicleInfo());
         }
@@ -90,7 +89,7 @@ namespace Task5_Garage
         {
             var random = new Random();
             var colors = new[] { "Red   ", "Orange", "Yellow", "Green ", "Blue  ", "Black ", "White ", "Gray  " };
-            var numberWheels = new[] { "3", "4", "6", "8" };
+            var numberWheels = new[] { 2, 3, 4, 6, 8 };
             var fuelTypes = new[] { "Diesel", "Gasoline", "Ethanol", "Electric" };
             int count = 0;
             for (int i = 0; i < capacity; i++)
@@ -100,7 +99,7 @@ namespace Task5_Garage
                 count++;
                 string regNr = RandomRegNr(random);
                 string color = colors[random.Next(colors.Length)];
-                string wheels = numberWheels[random.Next(numberWheels.Length)];
+                int wheels = numberWheels[random.Next(numberWheels.Length)];
                 //Might have to fix potential Null here
                 string randomVehicleType = random.Next(1, 5).ToString()!;
 
@@ -137,6 +136,14 @@ namespace Task5_Garage
                 ui.ShowMessage($"{count} vehicle successfully parked.");
             else
                 ui.ShowMessage($"{count} vehicles successfully parked.");
+
+        }
+
+        public void VehicleSearch(string? color = null, int? wheels = null, string? type = null)
+        {
+            //TODO: Change so that NumberOfWheels takes int instead of string and verify.
+            //var searchResults = garage.Where(vehicle => vehicle != null && (string.IsNullOrEmpty(color) 
+            //|| vehicle.Color.Equals(color, StringComparison.OrdinalIgnoreCase)) && (!wheels.HasValue || /*vehicle.NumberOfWheels == wheels*/) );
 
         }
         private string RandomRegNr(Random random)

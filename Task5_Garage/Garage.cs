@@ -20,7 +20,6 @@ namespace Task5_Garage
             Capacity = capacity;
             vehicles = new T[capacity];
             count = 0;
-
         }
 
         public int ParkVehicle(T vehicle)
@@ -71,18 +70,6 @@ namespace Task5_Garage
             }
             return default;
         }
-
-        //public T Find(string registrationNumber)
-        //{
-
-
-        //    return vehicles.FirstOrDefault(vehicle => 
-        //    vehicle.RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase) == true);
-
-
-        //}
-
-
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < Capacity; i++)
@@ -91,11 +78,7 @@ namespace Task5_Garage
                     yield return vehicles[i];
             }
         }
-
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-
-
         public bool CheckIfFull()
         {
             if (count >= Capacity)
