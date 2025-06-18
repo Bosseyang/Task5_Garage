@@ -2,9 +2,10 @@
 {
     public interface IUI
     {
-        string GetInput(string input);
+        string GetInput(string prompt);
         void ShowMenu();
-        void ShowMessage(string input);
+        void ShowMessage(string prompt);
         void ShowVehicleMenu();
+        int GetIntInput(string prompt);
     }
 }

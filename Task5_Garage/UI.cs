@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Task5_Garage.Interfaces;
+﻿using Task5_Garage.Interfaces;
 
 namespace Task5_Garage
 {
@@ -32,15 +27,27 @@ namespace Task5_Garage
             Console.WriteLine("5. Motorcycle");
             Console.WriteLine("0. Exit to Main Menu");
         }
-        public string GetInput(string input)
+        public string GetInput(string prompt)
         {
-            //TODO: Fix and validate input here
-            Console.Write($"{input}");
+            //TODO: Fix and validate input here (We are validating int down in GetIntInput())
+            Console.Write($"{prompt}");
             return Console.ReadLine()!;
         }
-        public void ShowMessage(string input)
+        public int GetIntInput(string prompt)
         {
-            Console.WriteLine($"{input}");
+            int value = 0;
+            while (true)
+            {
+                string input = GetInput(prompt);
+                if (int.TryParse(input, out value))
+                    return value;
+                Console.WriteLine("Invalid input, please enter an integer: ");
+            }
+
+        }
+        public void ShowMessage(string prompt)
+        {
+            Console.WriteLine($"{prompt}");
         }
     }
 }
