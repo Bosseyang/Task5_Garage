@@ -47,8 +47,6 @@ class Program
                 manager.Run();
             }
             Console.WriteLine("Please try again and enter an integer:");
-            
-
         }
     }
 }
