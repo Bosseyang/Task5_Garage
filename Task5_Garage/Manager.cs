@@ -7,7 +7,7 @@ namespace Task5_Garage
 {
     public class Manager
     {
-        private readonly IHandler? handler;
+        private readonly IHandler handler;
         private readonly IUI ui;
         private readonly int capacity;
 
@@ -28,6 +28,7 @@ namespace Task5_Garage
                 switch (inputChoice)
                 {
                     case "1":
+                        Console.Clear();
                         if (handler.CheckIfFull())
                             break;
                         while (true)
@@ -41,8 +42,7 @@ namespace Task5_Garage
                         }
                         break;
                     case "2":
-                        ui.ShowMessage("Enter registration number please");
-                        var reg = Console.ReadLine();
+                        var reg = ui.GetInput("Enter registration number: ");
                         handler.RemoveVehicle(reg);
                         break;
                     case "3":
@@ -52,10 +52,19 @@ namespace Task5_Garage
                         handler.ListVehicleTypes();
                         break;
                     case "5":
+                        //var regFind = ui.GetInput("Enter the registration number: ");
+                        var regFind = IsValidRegNr();
+                        if (regFind == "0")
+                            break;
+                        else
+                            handler.FindVehicle(regFind);
+                        break;
+                    case "6":
                         handler.RandomPopulateGarage(capacity);
                         break;
                     case "0":
-                        ui.ShowMessage("Exit Application");
+                        Console.Clear();
+                        ui.ShowMessage("Exiting application...");
                         Environment.Exit(0);
                         break;
                 }
@@ -67,39 +76,45 @@ namespace Task5_Garage
             var registrationNumber = IsValidRegNr();
             if (registrationNumber == "0")
             {
-                ui.ShowMessage("No registration number entered, vehicle not parked");
+                ui.ShowMessage("No valid registration number entered, vehicle not parked");
                 return;
             }
             var color = ui.GetInput("Color: ");
             var wheels = ui.GetInput("Number of Wheels: ");
+            bool parked = false;
             switch (inputVehicle)
             {
                 case "1":
                     var wingspan = ui.GetInput("Wingspan: ");
                     var airplane = new Airplane(registrationNumber, color, wheels, wingspan);
-                    handler.ParkVehicle(airplane);
+                    parked = handler.ParkVehicle(airplane);
                     break;
                 case "2":
                     var length = ui.GetInput("Length: ");
                     var boat = new Boat(registrationNumber, color, wheels, length);
-                    handler.ParkVehicle(boat);
+                    parked = handler.ParkVehicle(boat);
                     break;
                 case "3":
                     var numberOfSeats = ui.GetInput("Number of seats: ");
                     var buss = new Buss(registrationNumber, color, wheels, numberOfSeats);
-                    handler.ParkVehicle(buss);
+                    parked = handler.ParkVehicle(buss);
                     break;
                 case "4":
                     var fuelType = ui.GetInput("Fuel Type: ");
                     var car = new Car(registrationNumber, color, wheels, fuelType);
-                    handler.ParkVehicle(car);
+                    parked = handler.ParkVehicle(car);
                     break;
                 case "5":
                     var cylinderVolume = ui.GetInput("Cylinder volume: ");
                     var motorcycle = new Motorcycle(registrationNumber, color, wheels, cylinderVolume);
-                    handler.ParkVehicle(motorcycle);
+                    parked = handler.ParkVehicle(motorcycle);
                     break;
-            }            
+            }
+            if(parked == true)
+            {
+                ui.ShowMessage($"Vehicle successfully parked.");
+            }
+            
         }
 
         private string IsValidRegNr()
@@ -108,13 +123,19 @@ namespace Task5_Garage
             ui.ShowMessage("Enter 0 to exit to main menu");
             while (true)
             {
-                registrationNumber = ui.GetInput("Registration Number: ");
+                registrationNumber = ui.GetInput("Enter registration number: ");
                 if (registrationNumber == "0")
                     break;
                 else if (!System.Text.RegularExpressions.Regex.IsMatch(registrationNumber, @"^[A-Za-z]{3}[0-9]{3}$"))
+                {
                     ui.ShowMessage($"{registrationNumber} is not valid, please enter on the format abc123 (None case sensitive).");
+
+                }
                 else
+                {
+                    ui.ShowMessage($"Successfully entered registration number: {registrationNumber}");
                     break;
+                }
 
             }
             return registrationNumber.ToUpper();
