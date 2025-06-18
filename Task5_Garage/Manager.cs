@@ -71,16 +71,31 @@ namespace Task5_Garage
             }
         }
 
-        private void ParkVehicle(string inputVehicle)
+        private void ParkVehicle(string input)
         {
-            var registrationNumber = IsValidRegNr();
+            string inputVehicle = input;
+            while (true)
+            {
+                if (inputVehicle == "0")
+                {
+                    ui.ShowMessage("Exited to main menu");
+                    return;
+                }
+                if (new[] { "1", "2", "3", "4", "5" }.Contains(inputVehicle))
+                {
+                    break;
+                    
+                }
+                inputVehicle = ui.GetInput("Invalid vehicle selected, please try again: ");
+            }
+                var registrationNumber = IsValidRegNr();
             if (registrationNumber == "0")
             {
-                ui.ShowMessage("No valid registration number entered, vehicle not parked");
+                ui.ShowMessage("Exited to main menu");
                 return;
             }
             var color = ui.GetInput("Color: ");
-            var wheels = ui.GetInput("Number of Wheels: ");
+            var wheels = ui.GetIntInput("Number of wheels: ");
             bool parked = false;
             switch (inputVehicle)
             {
@@ -129,7 +144,6 @@ namespace Task5_Garage
                 else if (!System.Text.RegularExpressions.Regex.IsMatch(registrationNumber, @"^[A-Za-z]{3}[0-9]{3}$"))
                 {
                     ui.ShowMessage($"{registrationNumber} is not valid, please enter on the format abc123 (None case sensitive).");
-
                 }
                 else
                 {
