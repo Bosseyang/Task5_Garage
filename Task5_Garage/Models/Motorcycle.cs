@@ -10,7 +10,8 @@ namespace Task5_Garage.Models
     {
 
         public string CylinderVolume { get; }
-        public Motorcycle(string regNr, string color, string wheels, string cylinderVolume)
+        //TODO: Convert string to int cylinder volume
+        public Motorcycle(string regNr, string color, int wheels, string cylinderVolume)
             : base(regNr, color, wheels)
         {
             CylinderVolume = cylinderVolume;

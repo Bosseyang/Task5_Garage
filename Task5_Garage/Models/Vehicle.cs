@@ -11,9 +11,9 @@ namespace Task5_Garage.Models
     {
         public string RegistrationNumber { get; }
         public string Color { get; }
-        public string NumberOfWheels { get; }
+        public int NumberOfWheels { get; }
 
-        public Vehicle(string regNr, string color, string wheels)
+        public Vehicle(string regNr, string color, int wheels)
         {
             RegistrationNumber = regNr;
             Color = color;

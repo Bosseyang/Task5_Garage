@@ -9,7 +9,8 @@ namespace Task5_Garage.Models
     public class Airplane : Vehicle
     {
         public string WingSpan { get; }
-        public Airplane(string regNr, string color, string wheels, string wingSpan)
+        //TODO: Convert string to int for numberOfSeats
+        public Airplane(string regNr, string color, int wheels, string wingSpan)
             : base(regNr, color, wheels)
         {
             WingSpan = wingSpan;

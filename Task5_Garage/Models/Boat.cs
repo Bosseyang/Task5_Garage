@@ -10,7 +10,8 @@ namespace Task5_Garage.Models
     {
 
         public string Length { get; }
-        public Boat(string regNr, string color, string wheels, string length)
+        //TODO: Convert string to int for length
+        public Boat(string regNr, string color, int wheels, string length)
             : base(regNr, color, wheels)
         {
             Length = length;

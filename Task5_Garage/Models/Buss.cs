@@ -9,7 +9,8 @@ namespace Task5_Garage.Models
     public class Buss : Vehicle
     {
         public string NumberOfSeats { get; }
-        public Buss(string regNr, string color, string wheels, string numberOfSeats)
+        //TODO: Convert string to int for numberOfSeats
+        public Buss(string regNr, string color, int wheels, string numberOfSeats)
             : base(regNr, color, wheels)
         {
             NumberOfSeats = numberOfSeats;

@@ -3,7 +3,7 @@
     public interface IVehicle
     {
         string Color { get; }
-        string NumberOfWheels { get; }
+        int NumberOfWheels { get; }
         string RegistrationNumber { get; }
         string GetVehicleInfo();
     }
