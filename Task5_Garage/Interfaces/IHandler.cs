@@ -8,7 +8,7 @@ namespace Task5_Garage.Interfaces
 {
     public interface IHandler
     {
-        void ParkVehicle(IVehicle vehicle);
+        bool ParkVehicle(IVehicle vehicle);
         bool RemoveVehicle(string registrationNumber);
 
         bool CheckIfFull();
@@ -16,5 +16,7 @@ namespace Task5_Garage.Interfaces
         void ListVehicleTypes();
 
         void RandomPopulateGarage(int capacity);
+
+        void FindVehicle(string registrationNumber);
     }
 }

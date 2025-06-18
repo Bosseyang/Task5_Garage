@@ -40,24 +40,48 @@ namespace Task5_Garage
             return firstEmptyIndex + 1;
         }
 
-        public bool RemoveVehicle(string registrationNumber)
+        public string RemoveVehicle(string registrationNumber)
         {
-            bool removed = false;
+
+            if (count == 0)
+                return "Empty";
+            
             for (int i = 0; i < Capacity; i++)
             {
                 if (vehicles[i] != null && vehicles[i].RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine($"Removing {vehicles[i].GetType().Name} with {registrationNumber}... ");
+                    Console.WriteLine($"Removing {vehicles[i].GetType().Name} with registration number: {registrationNumber}... ");
                     vehicles[i] = default!;
                     count--;
-                    removed = true;
                     Console.WriteLine("Press a key to continue");
                     Console.ReadLine();
                     Console.Clear();
+                    return "Removed";
                 }
             }
-            return removed;
+            return "Not Found";
         }
+
+        public T? Find(string registrationNumber)
+        {
+            foreach (var v in vehicles)
+            {
+                if (v != null && v.RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase))
+                    return v;
+            }
+            return default;
+        }
+
+        //public T Find(string registrationNumber)
+        //{
+
+
+        //    return vehicles.FirstOrDefault(vehicle => 
+        //    vehicle.RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase) == true);
+
+
+        //}
+
 
         public IEnumerator<T> GetEnumerator()
         {

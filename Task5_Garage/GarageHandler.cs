@@ -28,8 +28,9 @@ namespace Task5_Garage
      
             return false;
         }
-        public void ParkVehicle(IVehicle vehicle)
+        public bool ParkVehicle(IVehicle vehicle)
         {
+            bool parked = false;
             Spot = garage.ParkVehicle(vehicle);
             if (Spot == 0)
                 Console.WriteLine("Failed to park vehicle, garage is full!");
@@ -37,10 +38,12 @@ namespace Task5_Garage
                 Console.WriteLine("Failed to park vehicle. " +
                     "Vehicle with same registration number is already parked.");
             else
-                Console.WriteLine($"Vehicle successfully parked at spot {Spot}");
+                parked = true;
+            return parked;
         }
         public void ListParkedVehicles()
         {
+         
             foreach (var v in garage)
                 ui.ShowMessage(v.GetVehicleInfo());
         }
@@ -53,16 +56,33 @@ namespace Task5_Garage
             }
         }
 
+        //public IVehicle FindVehicle(string registrationNumber) => garage.Find(registrationNumber);
+        public void FindVehicle(string registrationNumber)
+        {
+            var vehicle = garage.Find(registrationNumber);
+            if (vehicle != default)
+            {
+                ui.ShowMessage($"Found: {vehicle.GetVehicleInfo()}");
+            }
+            else
+                ui.ShowMessage($"No parked vehicle found with the given registration number: {registrationNumber}");
+        }
+
         public bool RemoveVehicle(string regNr)
         {
-            if (garage.RemoveVehicle(regNr))
+            if (garage.RemoveVehicle(regNr) == "Removed")
             {
-                Console.WriteLine($"Vehicle with registration number: {regNr} successfully removed");
+                Console.WriteLine($"Vehicle with registration number: {regNr} successfully removed.");
                 return true;
+            }
+            else if (garage.RemoveVehicle(regNr) == "Empty")
+            {
+                Console.WriteLine($"Garage is empty");
+                return false;
             }
             else
             {
-                Console.WriteLine($"Vehicle with registration number: {regNr} not found");
+                Console.WriteLine($"Vehicle with registration number: {regNr} not found.");
                 return false;
             }
         }
@@ -72,16 +92,12 @@ namespace Task5_Garage
             var colors = new[] { "Red   ", "Orange", "Yellow", "Green ", "Blue  ", "Black ", "White ", "Gray  " };
             var numberWheels = new[] { "3", "4", "6", "8" };
             var fuelTypes = new[] { "Diesel", "Gasoline", "Ethanol", "Electric" };
-            //var vehicleTypes = new[] { Enumerable.Range(1, 5).ToString() };
-            //var wingspans = new[] { Enumerable.Range(10, 40).ToString() };
-            //var lengths = new[] { Enumerable.Range(5, 40).ToString() };
-            //var cylinderVolumes = new[] {Enumerable.Range(49, 1500).ToString() };
-            //var numberOfSeats = new[] { Enumerable.Range(6, 80).ToString() };
-
+            int count = 0;
             for (int i = 0; i < capacity; i++)
             {
                 if (CheckIfFull())
                     break;
+                count++;
                 string regNr = RandomRegNr(random);
                 string color = colors[random.Next(colors.Length)];
                 string wheels = numberWheels[random.Next(numberWheels.Length)];
@@ -116,14 +132,11 @@ namespace Task5_Garage
                         ParkVehicle(motorcycle);
                         break;
                 }
-
-                //TODO: Add more vehicles as we go
-                //IVehicle vehicle = new Car("abc123", "Red", "4", "Diesel");
-
-                //if (typeof(T) == typeof(Car))
-                //    vehicle = new Car(regNr, color, wheels, fuel);
-                //ParkVehicle((T)vehicle);
             }
+            if(count == 1)
+                ui.ShowMessage($"{count} vehicle successfully parked.");
+            else
+                ui.ShowMessage($"{count} vehicles successfully parked.");
 
         }
         private string RandomRegNr(Random random)
