@@ -16,8 +16,9 @@ namespace Task5_Garage
             ShowMessage("2. Remove Vehicle");
             ShowMessage("3. List Parked Vehicles");
             ShowMessage("4. List Parked Vehicle Types and Their Corresponding Amount");
-            ShowMessage("5. Populate Garage with randomly generated vehicles");
-
+            ShowMessage("5. Find Vehicle with Registration Number");
+            ShowMessage("6. Populate Garage with randomly generated vehicles");
+            ShowMessage("0. Exit Application");
 
         }
         public void ShowVehicleMenu()
