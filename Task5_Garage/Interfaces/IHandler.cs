@@ -18,5 +18,7 @@ namespace Task5_Garage.Interfaces
         void RandomPopulateGarage(int capacity);
 
         void FindVehicle(string registrationNumber);
+
+        void VehicleSearch(string? color, int? wheels, string? type);
     }
 }
