@@ -142,7 +142,7 @@ namespace Task5_Garage
         public void VehicleSearch(string? color = null, int? wheels = null, string? type = null)
         {
             //TODO: Change so that NumberOfWheels takes int instead of string and verify.
-            //var searchResults = garage.Where(vehicle => vehicle != null && (string.IsNullOrEmpty(color) 
+            var searchResults = garage.Where(vehicle => vehicle != null && (string.IsNullOrEmpty(color)  ));
             //|| vehicle.Color.Equals(color, StringComparison.OrdinalIgnoreCase)) && (!wheels.HasValue || /*vehicle.NumberOfWheels == wheels*/) );
 
         }
