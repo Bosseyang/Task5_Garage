@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Text.RegularExpressions;
-using Task5_Garage.Interfaces;
+﻿using Task5_Garage.Interfaces;
 using Task5_Garage.Models;
 
 namespace Task5_Garage
@@ -20,12 +18,12 @@ namespace Task5_Garage
         }
         public bool CheckIfFull()
         {
-            if (garage.CheckIfFull()) 
-            { 
+            if (garage.CheckIfFull())
+            {
                 Console.WriteLine("Garage is full, can not park any more vehicles");
                 return true;
             }
-     
+
             return false;
         }
         public bool ParkVehicle(IVehicle vehicle)
@@ -132,20 +130,35 @@ namespace Task5_Garage
                         break;
                 }
             }
-            if(count == 1)
+            Console.Clear();
+            if (count == 1)
                 ui.ShowMessage($"{count} vehicle successfully parked.");
             else
                 ui.ShowMessage($"{count} vehicles successfully parked.");
+            
 
         }
 
         public void VehicleSearch(string? color = null, int? wheels = null, string? type = null)
         {
-            //TODO: Change so that NumberOfWheels takes int instead of string and verify.
-            var searchResults = garage.Where(vehicle => vehicle != null && (string.IsNullOrEmpty(color)  ));
-            //|| vehicle.Color.Equals(color, StringComparison.OrdinalIgnoreCase)) && (!wheels.HasValue || /*vehicle.NumberOfWheels == wheels*/) );
+            var searchResults = garage.Where(vehicle => vehicle != null && (string.IsNullOrEmpty(color)
+            || vehicle.Color.Equals(color, StringComparison.OrdinalIgnoreCase)) && (!wheels.HasValue ||
+            vehicle.NumberOfWheels == wheels) && (string.IsNullOrEmpty(type) ||
+            vehicle.GetType().Name.Equals(type, StringComparison.OrdinalIgnoreCase))
+            );
 
+            if (!searchResults.Any())
+            {
+                ui.ShowMessage("No vehicles for the given search criteria found");
+                return;
+            }
+
+            ui.ShowMessage("Matching vehicles: ");
+            foreach (var v in searchResults) { 
+                ui.ShowMessage(v.GetVehicleInfo());
+            }
         }
+
         private string RandomRegNr(Random random)
         {
             string letters = new string(Enumerable.Range(0, 3).Select(r => (char)random.Next('A', 'Z' + 1)).ToArray());
