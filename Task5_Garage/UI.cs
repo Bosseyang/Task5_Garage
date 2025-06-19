@@ -12,7 +12,8 @@ namespace Task5_Garage
             ShowMessage("3. List Parked Vehicles");
             ShowMessage("4. List Parked Vehicle Types and Their Corresponding Amount");
             ShowMessage("5. Find Vehicle with Registration Number");
-            ShowMessage("6. Populate Garage with randomly generated vehicles");
+            ShowMessage("6. Find Vehicle with properties");
+            ShowMessage("7. Populate Garage with randomly generated vehicles");
             ShowMessage("0. Exit Application");
 
         }
