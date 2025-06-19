@@ -60,6 +60,9 @@ namespace Task5_Garage
                             handler.FindVehicle(regFind);
                         break;
                     case "6":
+                        VehicleSearchUsingProperties();
+                        break;
+                    case "7":
                         handler.RandomPopulateGarage(capacity);
                         break;
                     case "0":
@@ -88,7 +91,8 @@ namespace Task5_Garage
                 }
                 inputVehicle = ui.GetInput("Invalid vehicle selected, please try again: ");
             }
-                var registrationNumber = IsValidRegNr();
+
+            var registrationNumber = IsValidRegNr();
             if (registrationNumber == "0")
             {
                 ui.ShowMessage("Exited to main menu");
@@ -97,6 +101,7 @@ namespace Task5_Garage
             var color = ui.GetInput("Color: ");
             var wheels = ui.GetIntInput("Number of wheels: ");
             bool parked = false;
+
             switch (inputVehicle)
             {
                 case "1":
@@ -130,6 +135,21 @@ namespace Task5_Garage
                 ui.ShowMessage($"Vehicle successfully parked.");
             }
             
+        }
+
+        private void VehicleSearchUsingProperties()
+        {
+            ui.ShowMessage("Search for parked vehicles using properties. ");
+            ui.ShowMessage("Please leave field empty if you choose to skip ");
+
+            var color = ui.GetInput("Color: ");
+            var inputWheels = ui.GetInput("Number of wheeles: ");
+            int? wheels = int.TryParse(inputWheels, out int w) ? w : (int?)null;
+            var type = ui.GetInput("Vehicle type: ");
+
+            handler.VehicleSearch(string.IsNullOrEmpty(color) ? null:color, wheels, string.IsNullOrEmpty(type) ? null:type);
+
+
         }
 
         private string IsValidRegNr()
