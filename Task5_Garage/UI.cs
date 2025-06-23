@@ -19,14 +19,14 @@ namespace Task5_Garage
         }
         public void ShowVehicleMenu()
         {
-            Console.WriteLine("\n ----- Vehicle Menu ----- ");
-            Console.WriteLine("Which type of vehicle are you parking?");
-            Console.WriteLine("1. Airplane");
-            Console.WriteLine("2. Boat");
-            Console.WriteLine("3. Buss");
-            Console.WriteLine("4. Car");
-            Console.WriteLine("5. Motorcycle");
-            Console.WriteLine("0. Exit to Main Menu");
+            ShowMessage("\n ----- Vehicle Menu ----- ");
+            ShowMessage("Which type of vehicle are you parking?");
+            ShowMessage("1. Airplane");
+            ShowMessage("2. Boat");
+            ShowMessage("3. Buss");
+            ShowMessage("4. Car");
+            ShowMessage("5. Motorcycle");
+            ShowMessage("0. Exit to Main Menu");
         }
         public string GetInput(string prompt)
         {
