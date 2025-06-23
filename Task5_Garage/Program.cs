@@ -3,20 +3,23 @@
 //TODO: Update along the project
 
 //Program
-//  - Manager/
-//      - Garage
-//      - GarageHandler
-//      - UI
+//  - Manager
+//  - Garage
+//  - GarageHandler
+
 
 //  - Models/
 //      - Car
 //      - Airplane
 //      - Vehicle
+//      - Boat
+//      - Motorcycle
 
 //  - Interfaces/
 //      -IUI
 //      -IHandler
 //      -IVehicle
+//      -IGarage
 
 //  - UI/
 //      - ConsoleUI
