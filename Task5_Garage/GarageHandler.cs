@@ -116,7 +116,7 @@ namespace Task5_Garage
                         break;
                     case "3":
                         string numberOfSeat = random.Next(8, 80).ToString();
-                        IVehicle buss = new Buss(regNr, color, wheels, numberOfSeat);
+                        IVehicle buss = new Bus(regNr, color, wheels, numberOfSeat);
                         ParkVehicle(buss);
                         break;
                     case "4":

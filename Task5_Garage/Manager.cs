@@ -136,7 +136,7 @@ namespace Task5_Garage
                     break;
                 case "3":
                     var numberOfSeats = ui.GetInput("Number of seats: ");
-                    var buss = new Buss(registrationNumber, color, wheels, numberOfSeats);
+                    var buss = new Bus(registrationNumber, color, wheels, numberOfSeats);
                     parked = handler.ParkVehicle(buss);
                     break;
                 case "4":
