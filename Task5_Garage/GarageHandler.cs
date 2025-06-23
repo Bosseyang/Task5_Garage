@@ -3,27 +3,28 @@ using Task5_Garage.Models;
 
 namespace Task5_Garage
 {
-    public class GarageHandler : IHandler
+    public class GarageHandler(int capacity) : IHandler
     {
-        private Garage<IVehicle> garage;
-        private UI ui;
+        private Garage<IVehicle> garage = new Garage<IVehicle>(capacity);
+        private UI ui = new UI();
         public int Spot { get; private set; }
 
-
-        public GarageHandler(int capacity)
-        {
-            garage = new Garage<IVehicle>(capacity);
-            ui = new UI();
-
-        }
         public bool CheckIfFull()
         {
             if (garage.CheckIfFull())
             {
-                Console.WriteLine("Garage is full, can not park any more vehicles");
+                ui.ShowMessage("Garage is full, can not park any more vehicles");
                 return true;
             }
-
+            return false;
+        }
+        public bool CheckIfEmpty()
+        {
+            if (garage.CheckIfEmpty())
+            {
+                ui.ShowMessage("Garage is empty.");
+                return true;
+            }
             return false;
         }
         public bool ParkVehicle(IVehicle vehicle)
@@ -135,16 +136,20 @@ namespace Task5_Garage
                 ui.ShowMessage($"{count} vehicle successfully parked.");
             else
                 ui.ShowMessage($"{count} vehicles successfully parked.");
-            
+
 
         }
 
         public void VehicleSearch(string? color = null, int? wheels = null, string? type = null)
         {
-            var searchResults = garage.Where(vehicle => vehicle != null && (string.IsNullOrEmpty(color)
-            || vehicle.Color.Equals(color, StringComparison.OrdinalIgnoreCase)) && (!wheels.HasValue ||
-            vehicle.NumberOfWheels == wheels) && (string.IsNullOrEmpty(type) ||
-            vehicle.GetType().Name.Equals(type, StringComparison.OrdinalIgnoreCase))
+            //Here we match Color, Wheels and type. If user just skips (presses enter without input)
+            //It considers it a match with every propertie just skipped.
+            var searchResults = garage.Where(vehicle => vehicle != null &&
+            (string.IsNullOrWhiteSpace(color) ||
+     (!string.IsNullOrWhiteSpace(vehicle.Color) &&
+      vehicle.Color.Trim().Equals(color.Trim(), StringComparison.OrdinalIgnoreCase))) && 
+            (!wheels.HasValue || vehicle.NumberOfWheels == wheels) && 
+            (string.IsNullOrWhiteSpace(type) || vehicle.GetType().Name.Equals(type, StringComparison.OrdinalIgnoreCase))
             );
 
             if (!searchResults.Any())
@@ -154,12 +159,13 @@ namespace Task5_Garage
             }
 
             ui.ShowMessage("Matching vehicles: ");
-            foreach (var v in searchResults) { 
+            foreach (var v in searchResults)
+            {
                 ui.ShowMessage(v.GetVehicleInfo());
             }
         }
 
-        private string RandomRegNr(Random random)
+        private static string RandomRegNr(Random random)
         {
             string letters = new string(Enumerable.Range(0, 3).Select(r => (char)random.Next('A', 'Z' + 1)).ToArray());
             //(100, 1000) makes it within range of three digits.
