@@ -27,7 +27,7 @@ namespace Task5_Garage
                 var inputChoice = Console.ReadLine();
                 switch (inputChoice)
                 {
-                    case "1":
+                    case "1": //Park vehicle
                         Console.Clear();
                         if (handler.CheckIfFull())
                             break;
@@ -41,28 +41,48 @@ namespace Task5_Garage
                             break;
                         }
                         break;
-                    case "2":
+                    case "2": //Removes vehicle matching registration number entered
                         var reg = ui.GetInput("Enter registration number: ");
+                        Console.Clear();
                         handler.RemoveVehicle(reg);
                         break;
-                    case "3":
+                    case "3": //Lists parked vehicles
+                        Console.Clear();
+                        handler.CheckIfEmpty();
                         handler.ListParkedVehicles();
                         break;
-                    case "4":
+                    case "4": //Lists amount of each vehicle type parked
+                        Console.Clear();
+                        handler.CheckIfEmpty();
                         handler.ListVehicleTypes();
                         break;
-                    case "5":
-                        //var regFind = ui.GetInput("Enter the registration number: ");
+                    case "5": 
+                        if (handler.CheckIfEmpty())
+                            break;
+
                         var regFind = IsValidRegNr();
                         if (regFind == "0")
+                        {
+                            Console.Clear();
+                            ui.ShowMessage("Exited to main menu.");
                             break;
+                        }
                         else
+                        {
+                            Console.Clear();
                             handler.FindVehicle(regFind);
+                        }
                         break;
                     case "6":
+                        Console.Clear();
+                        if (handler.CheckIfEmpty())
+                            break;
                         VehicleSearchUsingProperties();
                         break;
                     case "7":
+                        Console.Clear();
+                        if (handler.CheckIfFull())
+                            break;
                         handler.RandomPopulateGarage(capacity);
                         break;
                     case "0":

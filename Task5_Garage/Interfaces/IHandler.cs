@@ -12,13 +12,11 @@ namespace Task5_Garage.Interfaces
         bool RemoveVehicle(string registrationNumber);
 
         bool CheckIfFull();
+        bool CheckIfEmpty();
         void ListParkedVehicles();
         void ListVehicleTypes();
-
         void RandomPopulateGarage(int capacity);
-
         void FindVehicle(string registrationNumber);
-
         void VehicleSearch(string? color, int? wheels, string? type);
     }
 }

@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task5_Garage", "Task5_Garage\Task5_Garage.csproj", "{7007DA43-4665-4293-860F-444F9EB81876}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageTest", "GarageTest\GarageTest.csproj", "{30E1BA10-CCA7-4964-8AF8-D6F0A64A3E3C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7007DA43-4665-4293-860F-444F9EB81876} = {7007DA43-4665-4293-860F-444F9EB81876}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{7007DA43-4665-4293-860F-444F9EB81876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7007DA43-4665-4293-860F-444F9EB81876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7007DA43-4665-4293-860F-444F9EB81876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E1BA10-CCA7-4964-8AF8-D6F0A64A3E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E1BA10-CCA7-4964-8AF8-D6F0A64A3E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E1BA10-CCA7-4964-8AF8-D6F0A64A3E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E1BA10-CCA7-4964-8AF8-D6F0A64A3E3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
