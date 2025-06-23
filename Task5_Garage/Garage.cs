@@ -6,7 +6,7 @@ using Task5_Garage.Models;
 
 namespace Task5_Garage
 {
-    public class Garage<T> : IEnumerable<T> where T : IVehicle
+    public class Garage<T> : IEnumerable<T>, IGarage<T> where T : IVehicle
     {
         //Private array of vehicles using generics with IVehicle interface
         private T[] vehicles;
@@ -27,7 +27,7 @@ namespace Task5_Garage
             //TODO: Validate with following Abc123 format
             //We check if the garage is full OR if our input vehicle has the same regNr
             //as any of the already parked ones.
-       
+
             if (count >= Capacity)
                 return 0;
             else if (vehicles.Any(v => v?.RegistrationNumber == vehicle.RegistrationNumber))
@@ -44,17 +44,17 @@ namespace Task5_Garage
 
             if (count == 0)
                 return "Empty";
-            
+
             for (int i = 0; i < Capacity; i++)
             {
                 if (vehicles[i] != null && vehicles[i].RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine($"Removing {vehicles[i].GetType().Name} with registration number: {registrationNumber}... ");
+                    //Console.WriteLine($"Removing {vehicles[i].GetType().Name} with registration number: {registrationNumber}... ");
                     vehicles[i] = default!;
                     count--;
-                    Console.WriteLine("Press a key to continue");
-                    Console.ReadLine();
-                    Console.Clear();
+                    //Console.WriteLine("Press a key to continue");
+                    //Console.ReadLine();
+                    //Console.Clear();
                     return "Removed";
                 }
             }
@@ -82,6 +82,15 @@ namespace Task5_Garage
         public bool CheckIfFull()
         {
             if (count >= Capacity)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool CheckIfEmpty()
+        {
+            if (count <= 0)
             {
                 return true;
             }
